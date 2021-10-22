@@ -2,7 +2,7 @@ INC_DIR = -Iinclude
 
 FLAGS = -Wall -Werror -Wextra
 
-FILES = main.cpp src/WeatherDataVec.cpp
+FILES = main.cpp src/csvregex.cpp src/WeatherDataVec.cpp
 
 EXECUTABLE_NAME = reg
 

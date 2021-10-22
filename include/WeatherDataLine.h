@@ -1,5 +1,6 @@
 #ifndef WEATHERDATALINE_H
 #define WEATHERDATALINE_H
+
 #include <iostream>
 #include <fstream>
 #include <regex>
