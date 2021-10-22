@@ -1,4 +1,6 @@
--- I added some headers today. Firstly, the header "csvregex.h" parses the raw data via regex. Secondly, the headers "WeatherDataLine.h" and "WeatherDataVec.h" -- 
+22:10:2021 
+
+I added some headers today. Firstly, the header "csvregex.h" parses the raw data via regex. Secondly, the headers "WeatherDataLine.h" and "WeatherDataVec.h" -- 
 provide nice wrappers for the data we are dealing with, in order to initialize the structures correctly just do something like the following:
 
 //filename is the path to one of our raw ".csv" files
@@ -6,4 +8,9 @@ WeatherDataVec Wdata {datavec(filename)};
 
 This provides immediate access to the data as a vector of WeatherDataLine, which encode the info of one line of the processed csv. To access the info within WeatherDataLine --
 Just use one of the corresponding functions such as get_day().
+
+IMPORTANT NOTE: it may very well be prudent to split up the header files into both .h and .cpp files, as they are currently quite short I deemed it unecessary;
+and I think that we can keep the file for the WeatherDataLine class and for the miscellaneous functions for the csv parsing as is since I don't imagine they will grow in length.
+However, we should consider whether or not to make a separate .cpp file for WeatherDataVec; this is probably the right thing to do depending on how we want to continue coding.
+
 
