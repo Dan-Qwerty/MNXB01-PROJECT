@@ -11,7 +11,7 @@
 #include "WeatherDataVec.h"
 
 WeatherDataVec WeatherDataVec::get_by_month(int month){
-    vector<WeatherDataLine> v;
+    std::vector<WeatherDataLine> v;
     for(auto x : data){
         if (x.get_month() == month){
             v.push_back(x);
@@ -21,7 +21,7 @@ WeatherDataVec WeatherDataVec::get_by_month(int month){
 }
 
 WeatherDataVec WeatherDataVec::get_by_year(int year){
-    vector<WeatherDataLine> v;
+    std::vector<WeatherDataLine> v;
     for(auto x : data){
         if (x.get_day() == day){
             v.push_back(x);
@@ -31,7 +31,7 @@ WeatherDataVec WeatherDataVec::get_by_year(int year){
 }
 
 WeatherDataVec WeatherDataVec::get_by_day(int day){
-    vector<WeatherDataLine> v;
+    std::vector<WeatherDataLine> v;
     for(auto x : data){
         if (x.get_day() == day){
             v.push_back(x);
@@ -40,7 +40,7 @@ WeatherDataVec WeatherDataVec::get_by_day(int day){
     return WeatherDataVec {v};
 }
 
-vector<int> WeatherDataVec::list_years(){
+std::vector<int> WeatherDataVec::list_years(){
     std::set<int> s;
     for (auto x : data){
         s.insert(x.get_year());
@@ -49,7 +49,7 @@ vector<int> WeatherDataVec::list_years(){
     return v;
 }
 
-vector<int> WeatherDataVec::list_days(){
+std::vector<int> WeatherDataVec::list_days(){
     std::set<int> s;
     for (auto x : data){
         s.insert(x.get_day());
