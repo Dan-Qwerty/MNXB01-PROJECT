@@ -6,8 +6,6 @@
 #include <algorithm>
 #include <iterator>
 #include <set>
-#include "csvregex.h"
-#include "WeatherDataLine.h"
 #include "WeatherDataVec.h"
 
 WeatherDataVec WeatherDataVec::get_by_month(int month){
