@@ -32,9 +32,9 @@ class WeatherDataVec{
 
     WeatherDataVec get_by_day(int day);
 
-    vector<int> list_years();
+    std::vector<int> list_years();
 
-    vector<int> list_days();
+    std::vector<int> list_days();
 
 };
 
