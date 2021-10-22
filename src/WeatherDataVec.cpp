@@ -23,7 +23,7 @@ WeatherDataVec WeatherDataVec::get_by_month(int month){
 WeatherDataVec WeatherDataVec::get_by_year(int year){
     std::vector<WeatherDataLine> v;
     for(auto x : data){
-        if (x.get_day() == day){
+        if (x.get_year() == year){
             v.push_back(x);
         }
     }
