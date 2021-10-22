@@ -21,6 +21,21 @@ class WeatherDataVec{
         }
         data = v;
     }
+
+    WeatherDataVec(std::vector<WeatherDataLine> d) : data(d) {}
+
+    //Now the good stuff
+
+    WeatherDataVec get_by_month(int month);
+
+    WeatherDataVec get_by_year(int year);
+
+    WeatherDataVec get_by_day(int day);
+
+    vector<int> list_years();
+
+    vector<int> list_days();
+
 };
 
 #endif
