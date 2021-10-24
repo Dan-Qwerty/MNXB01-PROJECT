@@ -1,7 +1,6 @@
 #include "csvregex.h"
 #include "WeatherDataLine.h"
 #include "WeatherDataVec.h"
-
 #include <iostream>
 
 

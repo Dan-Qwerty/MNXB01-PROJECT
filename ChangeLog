@@ -1,3 +1,8 @@
+24:10:2021
+upload the 1st version root function to achieve the goals
+the datapath in rootlogon.C may be modified since it is the absolute address to my system --QL
+
+
 22:10:2021 
 
 I added some headers today. Firstly, the header "csvregex.h" parses the raw data via regex. Secondly, the headers "WeatherDataLine.h" and "WeatherDataVec.h" -- 
@@ -12,5 +17,4 @@ Just use one of the corresponding functions such as get_day().
 IMPORTANT NOTE: it may very well be prudent to split up the header files into both .h and .cpp files, as they are currently quite short I deemed it unecessary;
 and I think that we can keep the file for the WeatherDataLine class and for the miscellaneous functions for the csv parsing as is since I don't imagine they will grow in length.
 However, we should consider whether or not to make a separate .cpp file for WeatherDataVec; this is probably the right thing to do depending on how we want to continue coding.
-
 
