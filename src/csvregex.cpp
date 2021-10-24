@@ -28,7 +28,7 @@ std::vector<std::string> datavec(std::string filename){
     std::vector<std::string> v;
     std::string line;
     std::ifstream file (filename);
-    std::regex re ("[0-9]{4}-[0-9]{2}-[0-9]{2};[0-9]{2}:[0-9]{2}:[0-9]{2};[0-9]{1,}.[0-9];G");
+    std::regex re ("[0-9]{4}-[0-9]{2}-[0-9]{2};[0-9]{2}:[0-9]{2}:[0-9]{2};-{0,1}[0-9]{1,}.[0-9];G");
     std::smatch m;
     while (std::getline(file,line)){
         std::regex_search(line,m,re);
