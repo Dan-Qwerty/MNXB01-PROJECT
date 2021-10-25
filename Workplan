@@ -3,9 +3,10 @@ choose two time periods (say, 1940-1950 and 2005-2015). for each day in a given 
 and then plot the resulting two graphs on top of each other for easy comparison - CF
 
 
-analyse the specified month temperature in every year
-the histogram of average temperature
-the highest/lowest temperature
+analyse the specified month temperature for every year including:
+-- plot the histogram of average temperature
+-- find and plot the highest/lowest temperature of that month in each month
+-- do some fits, analysis the trend
 etc
 - QL
 
