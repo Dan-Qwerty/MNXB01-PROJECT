@@ -10,3 +10,5 @@ analyse the specified month temperature for every year including:
 etc
 - QL
 
+Regression with candidate function consisting of the sum of a sinusoidal and linear component.
+-DF
