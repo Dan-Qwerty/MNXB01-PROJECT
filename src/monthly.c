@@ -17,9 +17,11 @@ using namespace std;
 #include <TTree.h>
 #include <TClonesArray.h>
 #include <TVirtualFitter.h>
+#include <TLatex.h>
 #include "RootClass.C"
 
-void temPerMonth_tree(Int_t month) {
+void temPerMonth_tree(Int_t month) // ttree built
+{
 	TFile* file = new TFile("monthdata.root", "RECREATE");
 	TTree* tree = new TTree("tree", "Output tree");
 	Year* byyear = new Year();
@@ -82,7 +84,7 @@ void temPerMonth()//plot the histo of the average temperature of the month
 	h1->Fit("gaus");
 	h1->Draw();
 
-	TH1D *h2 = new TH1D("h2", "Monthly temperatures distribution; Celsius; Counts", 100, -10, 30);
+	TH1D *h2 = new TH1D("h2", "Monthly temperatures distribution; Temperature ^{o}C; Year Count", 100, -10, 30);
 	(TVirtualFitter::GetFitter())->GetConfidenceIntervals(h2);
 	h2->SetStats(kFALSE);
 	h2->SetFillColor(41);
@@ -135,12 +137,15 @@ void MonthExtreme()//plot the extreme temperatures & average temperature of the 
 	TGraph* g2 = new TGraph(nYears, x, yC);
 	TGraph* g3 = new TGraph(nYears, x, yA);
 	TMultiGraph *mg = new TMultiGraph();
-	mg->SetTitle("Month Extreme Temperature; year; Temp");
+	mg->SetTitle("Month Extreme Temperature; Year; Temperature ^{o}C");
 	g1->SetFillColor(46);
 	g2->SetFillColor(38);
+	g3->SetLineWidth(3);
+	g3->SetLineColor(12);
+	g3->Fit("pol1");
 	mg->Add(g1);
 	mg->Add(g2);
 	mg->Draw("AB");
-	g3->Draw("same");
+	g3->Draw("C same");
 }
 
