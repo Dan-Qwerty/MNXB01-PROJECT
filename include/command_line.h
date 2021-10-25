@@ -6,7 +6,7 @@
 
 namespace error {
 	enum Error {
-		none, space
+		none, space, no_filename
 	};
 }
 
