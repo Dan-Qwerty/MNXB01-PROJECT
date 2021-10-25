@@ -12,3 +12,6 @@ etc
 
 Long term regression plot with candidate function consisting of the sum of a sinusoidal and linear component.
 -DF
+
+Make a command line that works similarly to the root command line. Should be able to run commands to produce the plots.
+-IE
