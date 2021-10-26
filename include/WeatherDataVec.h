@@ -36,6 +36,8 @@ class WeatherDataVec{
     std::vector<int> list_years();
 
     std::vector<int> list_days();
+    
+    std::vector<double> list_temperatures();
 
 };
 
