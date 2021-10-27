@@ -49,4 +49,4 @@ class WeatherDataLine{
     }
 };
 
-#endif
+#endif /*WEATHERDATALINE_H*/

@@ -1,12 +1,14 @@
-#include <iostream>
-#include <fstream>
-#include <regex>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <iterator>
-#include <set>
 #include "WeatherDataVec.h"
+
+WeatherDataVec::WeatherDataVec(std::vector<std::string> data_strings){
+	std::vector<WeatherDataLine> v;
+    for (std::string m : data_strings){
+        v.push_back(WeatherDataLine {m});
+    }
+    data = v;
+}
+
+WeatherDataVec::WeatherDataVec(std::vector<WeatherDataLine> d) : data{d} {}
 
 WeatherDataVec WeatherDataVec::get_by_month(int month){
     std::vector<WeatherDataLine> v;

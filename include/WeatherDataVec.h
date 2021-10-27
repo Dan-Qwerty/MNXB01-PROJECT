@@ -8,24 +8,18 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <set>
 #include "csvregex.h"
 #include "WeatherDataLine.h"
 
+
 class WeatherDataVec{
     public:
-    std::vector<WeatherDataLine> data;
+    std::vector<WeatherDataLine> data; 
     
-    WeatherDataVec(std::vector<std::string> data_strings){
-        std::vector<WeatherDataLine> v;
-        for (std::string m : data_strings){
-            v.push_back(WeatherDataLine {m});
-        }
-        data = v;
-    }
+    WeatherDataVec(std::vector<std::string> data_strings); // constructor
 
-    WeatherDataVec(std::vector<WeatherDataLine> d) : data(d) {}
-
-    //Now the good stuff
+    WeatherDataVec(std::vector<WeatherDataLine> d); // constructor
 
     WeatherDataVec get_by_month(int month);
 
@@ -41,4 +35,4 @@ class WeatherDataVec{
 
 };
 
-#endif
+#endif /*WEATHERDATAVEC_H*/

@@ -5,7 +5,6 @@
 #include "csvregex.h"
 #include "WeatherDataLine.h"
 #include "WeatherDataVec.h"
-using namespace std;
 
 #include <TF1.h>
 #include <TH1.h>
@@ -19,8 +18,7 @@ using namespace std;
 #include <TLatex.h>
 #include "RootClass.C"
 
-void temPerMonth_tree(Int_t month) // ttree built
-{
+void Month_tree(Int_t month) {
 	TFile* file = new TFile("monthdata.root", "RECREATE");
 	TTree* tree = new TTree("tree", "Output tree");
 	Year* byyear = new Year();
@@ -29,10 +27,10 @@ void temPerMonth_tree(Int_t month) // ttree built
 	tree->Branch("data", "TClonesArray", &dataArray);
 	Int_t nT = 0;
 	
-	string filename {"../datasets/smhi-opendata_1_53430_20210926_101122_Lund.csv"};
+	std::string filename {"../datasets/smhi-opendata_1_53430_20210926_101122_Lund.csv"};
 	WeatherDataVec Wdata {datavec(filename)};
 	WeatherDataVec datamonth = Wdata.get_by_month(month);
-	vector<int> list_years = datamonth.list_years();
+	std::vector<int> list_years = datamonth.list_years();
 	for(Int_t n = 0; n < (Int_t) list_years.size() ; n++){
 		byyear->year = list_years[n];
 
@@ -205,7 +203,7 @@ Double_t meanOfPeriod (WeatherDataVec data, int frYear, int frMonth, int frDate,
 		tie(frYear, frMonth, frDate) = dateCalculation(frYear, frMonth, frDate, 1);	
 		period--;	
 	}
-	cout << sum/count << endl;
+	std::cout << sum/count << endl;
 	return sum/count;
 }
 
@@ -220,8 +218,8 @@ void Corona()//discover the relation between the temperature and corona
 	Int_t i1 = 0;
 	Double_t i2 = 0.0;
 	Int_t year, week, kod, a, b, c, d;
-	string lund;
-	string _temp;
+	std::string lund;
+	std::string _temp;
 	while(file >> _temp)
 	{
 		if (_temp == "nya_fall_vecka")
@@ -243,7 +241,7 @@ void Corona()//discover the relation between the temperature and corona
 	}
 
 
-	string filename {"../datasets/smhi-opendata_1_53430_20210926_101122_Lund.csv"};
+	std::string filename {"../datasets/smhi-opendata_1_53430_20210926_101122_Lund.csv"};
 	WeatherDataVec Wdata {datavec(filename)};
 
 	Double_t temp[58];
@@ -259,7 +257,7 @@ void Corona()//discover the relation between the temperature and corona
 	Int_t toDate = 4;
 	Int_t _i = 0;
 	while (!(frYear >= toYear && frMonth >= toMonth && frDate >= toDate)){
-		cout<< frYear << ":" << frMonth<< " :" << frDate << endl;
+		std::cout<< frYear << ":" << frMonth<< " :" << frDate << endl;
 		temp[_i] = meanOfPeriod(Wdata, frYear, frMonth, frDate, 7);
 		tie(frYear, frMonth, frDate) = dateCalculation(frYear, frMonth, frDate, 7);
 		_i++;

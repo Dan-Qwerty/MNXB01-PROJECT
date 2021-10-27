@@ -4,10 +4,8 @@
 #include <TObject.h>
 #include <iostream>
 
-using namespace std;
 
-class Year : public TObject
-{
+class Year : public TObject {
 	public:
 		Int_t year;
 		Int_t nData;
@@ -17,15 +15,11 @@ class Year : public TObject
 
 ClassImp(Year)
 
-Year::Year():TObject(), year(0), nData(0) 
-{
-
-}
+Year::Year():TObject(), year(0), nData(0) {}
 
 
 
-class TempData : public TObject
-{
+class TempData : public TObject {
 	public:
 		Double_t temp;
 		TempData();
@@ -34,9 +28,6 @@ class TempData : public TObject
 
 ClassImp(TempData)
 
-TempData::TempData():TObject(), temp(0.0)
-{
-
-}
+TempData::TempData():TObject(), temp(0.0) {}
 
 #endif
