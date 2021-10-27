@@ -55,3 +55,11 @@ std::vector<int> WeatherDataVec::list_days(){
     std::vector<int> v(s.begin(),s.end());
     return v;
 }
+
+std::vector<double> WeatherDataVec::list_temperatures(){
+    std::vector<double> v;
+    for(auto w : data){
+        v.push_back(w.get_temp());
+    }
+    return v;
+}

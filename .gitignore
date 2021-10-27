@@ -1,0 +1,6 @@
+#Files from build
+*.o
+*.s
+*.so
+*.d
+*.pcm
