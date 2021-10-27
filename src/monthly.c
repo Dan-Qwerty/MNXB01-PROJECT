@@ -5,8 +5,6 @@
 #include "csvregex.h"
 #include "WeatherDataLine.h"
 #include "WeatherDataVec.h"
-//#include "csvregex.cpp"
-//#include "WeatherDataVec.cpp"
 using namespace std;
 
 #include <TF1.h>
@@ -14,7 +12,6 @@ using namespace std;
 #include <TStyle.h>
 #include <TGraph.h>
 #include <TCanvas.h>
-//#include <TPad.h>
 #include <TFile.h>
 #include <TTree.h>
 #include <TClonesArray.h>
@@ -250,11 +247,11 @@ void Corona()//discover the relation between the temperature and corona
 	WeatherDataVec Wdata {datavec(filename)};
 
 	Double_t temp[58];
-	////////yixiawei ceshi yong
-	for (int i = 0; i < 58; i++)
-	temp[i] = 14.4;
+	////////this is for test, saving time
+	//for (int i = 0; i < 58; i++)
+	//temp[i] = 14.4;
 	//////////////////////////
-	/*Int_t frYear = 2020;
+	Int_t frYear = 2020;
 	Int_t frMonth = 2;
 	Int_t frDate = 24;
 	Int_t toYear = 2021;
@@ -266,7 +263,7 @@ void Corona()//discover the relation between the temperature and corona
 		temp[_i] = meanOfPeriod(Wdata, frYear, frMonth, frDate, 7);
 		tie(frYear, frMonth, frDate) = dateCalculation(frYear, frMonth, frDate, 7);
 		_i++;
-	}*/
+	}
 
 	TCanvas *c1 = new TCanvas("c1","Temperature & Corona",200,10,1200,600);
 	TGraph* g1 = new TGraph(58, veck1, antal);
@@ -312,39 +309,6 @@ void Corona()//discover the relation between the temperature and corona
 	pad2->Draw();
 	pad2->cd();
 	g2->Draw();
-	/*TGaxis *a1 = new TGaxis(62, 0, 62, 800, -10, 25, 510, "+L");
-	a1->SetName("a1");
-	a1->SetTitle("Temperature ^{o}C");
- 	a1->Draw("same");*/
-
-
-
-
-
-/*
-	//mg->SetTitle("Month Extreme Temperature; Week; Temperature ^{o}C");
-	g1->SetFillColor(46);
-	g2->GetXaxis()->SetTickLength(0);
-	g2->GetXaxis()->SetLabelOffset(999);
-	g2->GetXaxis()->SetLabelSize(0);
-	g1->GetXaxis()->SetRangeUser(0, 62);
-	g1->GetXaxis()->ChangeLabel(1,-1,-1,-1,-1,-1,"9");
-	g1->GetXaxis()->ChangeLabel(2,-1,-1,-1,-1,-1,"19");
-	g1->GetXaxis()->ChangeLabel(3,-1,-1,-1,-1,-1,"29");
-	g1->GetXaxis()->ChangeLabel(4,-1,-1,-1,-1,-1,"39");
-	g1->GetXaxis()->ChangeLabel(5,-1,-1,-1,-1,-1,"49");
-	g1->GetXaxis()->ChangeLabel(6,-1,-1,-1,-1,-1,"6");
-	g1->GetXaxis()->ChangeLabel(7,-1,-1,-1,-1,-1,"16");
-	g1->Draw("AB");
-	g2->Draw("same");
-
-	TGaxis *a1 = new TGaxis(62, 0, 62, 800, -10, 25, 510, "+L");
-	a1->SetName("a1");
-	a1->SetTitle("Temperature ^{o}C");
- 	a1->Draw();
-*/
-
-
 
 }
 
