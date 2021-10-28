@@ -1,3 +1,8 @@
+28:10:2021
+Added a ROOT script (avg_periodtemp.C) which should (although I haven't been able to actually test it yet) compute
+the average of the temperatures of each individual day across two time periods, then plot this as two histograms on
+the same canvas.
+
 24:10:2021
 upload the 1st version root function to achieve the goals
 the datapath in rootlogon.C may be modified since it is the absolute address to my system --QL
