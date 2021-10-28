@@ -4,3 +4,7 @@
 *.so
 *.d
 *.pcm
+
+#Executable files
+reg
+reg.exe
