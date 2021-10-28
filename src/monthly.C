@@ -66,7 +66,7 @@ void Analyse_Monthly::Temp_PerMonth() {
 	tree->SetBranchAddress("byyear", &byyear);
 	tree->SetBranchAddress("data", &dataArray);
 	
-
+	TCanvas *c2 = new TCanvas("c2","Monthly temperatures distribution",200,10,1000,600);
 	TH1D* h1 = new TH1D("h1", "Monthly temperatures distribution; Celsius; Counts", 100, -10, 30);
 	
 	const Int_t nYears = tree->GetEntries();
