@@ -1,3 +1,10 @@
+28:10:2021
+Encapsulated my functions from "monthly.C" into two classes:
+class Analyse_Monthly    in    "monthly.h" & "monthly.C"
+class Analyse_Corona    in    "corona.h" & "corona.C"
+and improve rootlogon.C
+--QL
+
 24:10:2021
 upload the 1st version root function to achieve the goals
 the datapath in rootlogon.C may be modified since it is the absolute address to my system --QL

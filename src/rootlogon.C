@@ -16,5 +16,8 @@ void rootlogon() {
 	//Load the classes that we want to use automatically - Convenient!
 	gROOT->ProcessLine(".L csvregex.cpp+");
 	gROOT->ProcessLine(".L WeatherDataVec.cpp+");
+	gROOT->ProcessLine(".L ../include/RootClass.C+");
  	gROOT->ProcessLine(".L monthly.C"); 
+	gROOT->ProcessLine(".L corona.C"); 
+	gROOT->ProcessLine(".L project.cpp"); 
 }
