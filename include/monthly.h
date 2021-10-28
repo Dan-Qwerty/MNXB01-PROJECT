@@ -2,7 +2,10 @@
 #define MONTHLY_H
 #include <iostream>
 #include <fstream>
+#include <tuple>
 #include <algorithm>
+#include "csvregex.h"
+#include "WeatherDataLine.h"
 #include "WeatherDataVec.h"
 #include "RootClass.C"
 
@@ -27,7 +30,7 @@ class Analyse_Monthly {
 	public:
 	Analyse_Monthly(Int_t month);
 	void Temp_PerMonth(); //plot the histo of the average temperature of the month
-	void Month_Extreme(); //plot the extreme temperatures & average temperature of the month
+	void Month_Extreme(); //plot the extreme temperatures & average temperature of the month each year
 };
 
 

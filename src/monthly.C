@@ -1,29 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <algorithm>
-#include <tuple>
-#include "csvregex.h"
-#include "WeatherDataLine.h"
-#include "WeatherDataVec.h"
-
-#include <TF1.h>
-#include <TH1.h>
-#include <TStyle.h>
-#include <TGraph.h>
-#include <TCanvas.h>
-#include <TFile.h>
-#include <TTree.h>
-#include <TClonesArray.h>
-#include <TVirtualFitter.h>
-#include <TLatex.h>
 #include "monthly.h"
-#include "RootClass.C"
-
 
 Analyse_Monthly::Analyse_Monthly(Int_t month): _month{month}{
-Month_tree();
+	Month_tree();
 }
-
 
 void Analyse_Monthly::Month_tree() {
 	TFile* file = new TFile("monthdata.root", "RECREATE");
@@ -66,8 +45,8 @@ void Analyse_Monthly::Temp_PerMonth() {
 	tree->SetBranchAddress("byyear", &byyear);
 	tree->SetBranchAddress("data", &dataArray);
 	
-	TCanvas *c2 = new TCanvas("c2","Monthly temperatures distribution",200,10,1000,600);
-	TH1D* h1 = new TH1D("h1", "Monthly temperatures distribution; Celsius; Counts", 100, -10, 30);
+	TCanvas *c2 = new TCanvas("c2","Monthly temperatures distribution",250,10,1000,600);
+	TH1D* h1 = new TH1D("h1", "Monthly temperatures distribution; Celsius; Counts", 150, -10, 30);
 	
 	const Int_t nYears = tree->GetEntries();
 	for (Int_t n = 0; n < nYears; n++) {
@@ -83,15 +62,26 @@ void Analyse_Monthly::Temp_PerMonth() {
 		h1->Fill(TempAver);
 	}
 	h1->Fit("gaus");
+	h1->SetLineWidth(2);
+	h1->GetXaxis()->SetTitleSize(0.03);
+	h1->GetXaxis()->SetLabelSize(0.03);
+	h1->GetYaxis()->SetTitleSize(0.03);
+	h1->GetYaxis()->SetLabelSize(0.03);
 	h1->Draw();
 
-	TH1D *h2 = new TH1D("h2", "Monthly temperatures distribution; Temperature ^{o}C; Year Count", 100, -10, 30);
+	TH1D *h2 = new TH1D("h2", "Monthly temperatures distribution; Temperature ^{o}C; Year Counts", 150, -10, 30);
 	(TVirtualFitter::GetFitter())->GetConfidenceIntervals(h2);
 	h2->SetStats(kFALSE);
 	h2->SetFillColor(41);
+	h2->GetXaxis()->SetTitleSize(0.03);
+	h2->GetXaxis()->SetLabelSize(0.03);
+	h2->GetYaxis()->SetTitleSize(0.03);
+	h2->GetYaxis()->SetLabelSize(0.03);
 	h2->Draw("e3");
 	h1->Draw("same");
 }
+
+
 
 void Analyse_Monthly::Month_Extreme() {
 	TFile* file = TFile::Open("monthdata.root");
@@ -103,6 +93,10 @@ void Analyse_Monthly::Month_Extreme() {
 	
 	const Int_t nYears = tree->GetEntries();
 	Double_t x[nYears], yH[nYears], yC[nYears], yA[nYears];
+	Double_t Highest = 0.0;
+	Double_t Lowest = 0.0;
+	Int_t year_highest = 0;
+	Int_t year_lowest = 0;
 	
 	for (Int_t n = 0; n < nYears; n++) {
 		tree->GetEntry(n);
@@ -114,7 +108,7 @@ void Analyse_Monthly::Month_Extreme() {
 		for (Int_t i = 0; i < ndata; i++) {
 			TempData* TD = (TempData*)dataArray->At(i);
 			TempSum += TD->temp;
-			if (i==0){
+			if (i==0) {   //find out the monthly highest and lowest temperature: HTemp and CTemp
 				HTemp = TD->temp;
 				CTemp = TD->temp;
 			}
@@ -127,7 +121,24 @@ void Analyse_Monthly::Month_Extreme() {
 		yA[n] = TempAver;
 		yH[n] = HTemp;
 		yC[n] = CTemp;
+	//////the following is to find out the highest/lowest temperatures over all of the years. 
+		if (n != 0) {
+			Highest = std::max(yH[n], Highest);
+			Lowest = std::min(yC[n], Lowest);
+			if (Highest == yH[n])
+				year_highest = x[n];
+			if (Lowest == yC[n])
+				year_lowest = x[n];
+
+		} else {
+			Highest = yH[0];
+			Lowest = yC[0];
+			year_highest = x[0];
+			year_lowest	= x[0];
+		}
 	}
+	std::cout << "The highest temperature of this month is " << Highest << " occuring in " << year_highest << std::endl;
+	std::cout << "The lowest temperature of this month is " << Lowest << " occuring in " << year_lowest << std::endl;
 	
 	TCanvas *c1 = new TCanvas("c1","Month Extreme Temperature",200,10,1000,600);
 	TGraph* g1 = new TGraph(nYears, x, yH);
@@ -147,5 +158,5 @@ void Analyse_Monthly::Month_Extreme() {
 	mg->GetXaxis()->SetLabelSize(0.03);
 	mg->GetYaxis()->SetTitleSize(0.03);
 	mg->GetYaxis()->SetLabelSize(0.03);
-	g3->Draw("C same");
+	g3->Draw("same");
 }

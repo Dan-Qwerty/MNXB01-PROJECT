@@ -40,8 +40,7 @@ tuple<int, int, int> Analyse_Corona::dateCalculation(int year, int month, int da
 
 }
 
-Double_t Analyse_Corona::meanOfPeriod (WeatherDataVec data, int frYear, int frMonth, int frDate, int period)
-{
+Double_t Analyse_Corona::meanOfPeriod (WeatherDataVec data, int frYear, int frMonth, int frDate, int period) {
 // from date included, to date not included.
 	Double_t sum=0.0;
 	Int_t count=0;
@@ -61,8 +60,7 @@ Double_t Analyse_Corona::meanOfPeriod (WeatherDataVec data, int frYear, int frMo
 }
 
 
-void Analyse_Corona::Plot_Corona()//discover the relation between the temperature and corona
-{
+void Analyse_Corona::Plot_Corona() {
 	ifstream file("../datasets/lund_corona_data");
 	Int_t veck1[58];
 	Int_t antal[58];
@@ -73,18 +71,14 @@ void Analyse_Corona::Plot_Corona()//discover the relation between the temperatur
 	Int_t year, week, kod, a, b, c, d;
 	std::string lund;
 	std::string _temp;
-	while(file >> _temp)
-	{
-		if (_temp == "nya_fall_vecka")
-		{
+	while(file >> _temp) {
+		if (_temp == "nya_fall_vecka") {
 			break;
 		}
 	}
 
-	while(file >> year >> week >> kod >> lund >> lund >> a >> b >> c >> d)
-	{	
-		if( (year == 2020 && week >= 9) || (year == 2021 && week <=13) )
-		{
+	while(file >> year >> week >> kod >> lund >> lund >> a >> b >> c >> d) {	
+		if( (year == 2020 && week >= 9) || (year == 2021 && week <=13) ) {
 			veck1[i1] = i1;
 			veck2[i1] = i2;
 			antal[i1] = d;
@@ -110,7 +104,7 @@ void Analyse_Corona::Plot_Corona()//discover the relation between the temperatur
 	Int_t toDate = 4;
 	Int_t _i = 0;
 	while (!(frYear >= toYear && frMonth >= toMonth && frDate >= toDate)){
-		std::cout<< frYear << ":" << frMonth<< " :" << frDate << endl;
+		std::cout<< frYear << ":" << frMonth<< ":" << frDate << std::endl;
 		temp[_i] = meanOfPeriod(Wdata, frYear, frMonth, frDate, 7);
 		tie(frYear, frMonth, frDate) = dateCalculation(frYear, frMonth, frDate, 7);
 		_i++;
