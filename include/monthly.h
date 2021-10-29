@@ -20,7 +20,7 @@
 #include <TClonesArray.h>
 #include <TVirtualFitter.h>
 #include <TLatex.h>
-
+#include <TLegend.h>
 
 
 class Analyse_Monthly {

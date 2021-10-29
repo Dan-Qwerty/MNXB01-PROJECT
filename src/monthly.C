@@ -61,7 +61,8 @@ void Analyse_Monthly::Temp_PerMonth() {
 		
 		h1->Fill(TempAver);
 	}
-	h1->Fit("gaus");
+	TF1* fitfcn = new TF1("fitfcn", "gaus", -10, 30);
+	h1->Fit("fitfcn");
 	h1->SetLineWidth(2);
 	h1->GetXaxis()->SetTitleSize(0.03);
 	h1->GetXaxis()->SetLabelSize(0.03);
@@ -79,6 +80,12 @@ void Analyse_Monthly::Temp_PerMonth() {
 	h2->GetYaxis()->SetLabelSize(0.03);
 	h2->Draw("e3");
 	h1->Draw("same");
+
+	TLegend *l1 = new TLegend(0.73, 0.847, 0.946, 0.945);
+	l1->AddEntry(h1,"temp distribution","l");
+	l1->AddEntry(fitfcn,"fit","l");
+	l1->AddEntry(h2,"95% CI of fitting function","f");
+	l1->Draw();
 }
 
 
@@ -113,8 +120,8 @@ void Analyse_Monthly::Month_Extreme() {
 				CTemp = TD->temp;
 			}
 			else{
-				HTemp = max(TD->temp, HTemp);
-				CTemp = min(TD->temp, CTemp);
+				HTemp = std::max(TD->temp, HTemp);
+				CTemp = std::min(TD->temp, CTemp);
 			}
 		}
 		Double_t TempAver = TempSum/ndata;
@@ -137,7 +144,7 @@ void Analyse_Monthly::Month_Extreme() {
 			year_lowest	= x[0];
 		}
 	}
-	std::cout << "The highest temperature of this month is " << Highest << " occuring in " << year_highest << std::endl;
+	std::cout << "\nThe highest temperature of this month is " << Highest << " occuring in " << year_highest << std::endl;
 	std::cout << "The lowest temperature of this month is " << Lowest << " occuring in " << year_lowest << std::endl;
 	
 	TCanvas *c1 = new TCanvas("c1","Month Extreme Temperature",200,10,1000,600);
@@ -145,12 +152,13 @@ void Analyse_Monthly::Month_Extreme() {
 	TGraph* g2 = new TGraph(nYears, x, yC);
 	TGraph* g3 = new TGraph(nYears, x, yA);
 	TMultiGraph *mg = new TMultiGraph();
+	TF1* fitfcn = new TF1("fitfcn", "pol1", x[0], x[nYears]); // fitting function for average temp
 	mg->SetTitle("Month Extreme Temperature; Year; Temperature ^{o}C");
 	g1->SetFillColor(46);
 	g2->SetFillColor(38);
 	g3->SetLineWidth(3);
 	g3->SetLineColor(12);
-	g3->Fit("pol1");
+	g3->Fit("fitfcn");
 	mg->Add(g1);
 	mg->Add(g2);
 	mg->Draw("AB");
@@ -159,4 +167,11 @@ void Analyse_Monthly::Month_Extreme() {
 	mg->GetYaxis()->SetTitleSize(0.03);
 	mg->GetYaxis()->SetLabelSize(0.03);
 	g3->Draw("same");
+
+	TLegend *l1 = new TLegend(0.0051, 0.5178, 0.144, 0.652);
+	l1->AddEntry(g1,"highest temp","f");
+	l1->AddEntry(g2,"lowest temp","f");
+	l1->AddEntry(g3,"average temp","l");
+	l1->AddEntry(fitfcn,"linear fit","l");
+	l1->Draw();
 }

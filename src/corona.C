@@ -55,7 +55,7 @@ Double_t Analyse_Corona::meanOfPeriod (WeatherDataVec data, int frYear, int frMo
 		tie(frYear, frMonth, frDate) = dateCalculation(frYear, frMonth, frDate, 1);	
 		period--;	
 	}
-	std::cout << sum/count << endl;
+	std::cout << sum/count << std::endl;
 	return sum/count;
 }
 
@@ -103,8 +103,9 @@ void Analyse_Corona::Plot_Corona() {
 	Int_t toMonth = 4;
 	Int_t toDate = 4;
 	Int_t _i = 0;
+	std::cout << "\nYY.MM.DD -- Degree Celsius" << std::endl;
 	while (!(frYear >= toYear && frMonth >= toMonth && frDate >= toDate)){
-		std::cout<< frYear << ":" << frMonth<< ":" << frDate << std::endl;
+		std::cout << frYear << "." << frMonth<< "." << frDate << " -- ";
 		temp[_i] = meanOfPeriod(Wdata, frYear, frMonth, frDate, 7);
 		tie(frYear, frMonth, frDate) = dateCalculation(frYear, frMonth, frDate, 7);
 		_i++;
@@ -155,4 +156,8 @@ void Analyse_Corona::Plot_Corona() {
 	pad2->cd();
 	g2->Draw();
 
+	TLegend *l1 = new TLegend(0.28, 0.273, 0.5, 0.436);
+	l1->AddEntry(g1,"number of people infected","f");
+	l1->AddEntry(g2,"average temp","l");
+	l1->Draw();
 }
