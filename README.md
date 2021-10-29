@@ -2,9 +2,9 @@
 The project of the course MNXB01
 
 ///////////////////////////////////////////////////////
-I highly suggest if anyone is still struggling for Root
+
+I highly suggest if anyone is still struggling for Root,
 the following commands to load Root on Aurora may help
-///////////////////////////////////////////////////////
 
 module load GCC/5.4.0-2.26
 
@@ -18,6 +18,7 @@ root  or  root -l
 
 under the directory with rootlogon.C ( on github it is with the MY absolute path of include/, you should change it to you OWN path),
 then all will run automatically, no need for Makefile anymore.
+
 /////////////////////////////////////////////////////////
 
 
