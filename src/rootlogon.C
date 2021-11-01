@@ -10,7 +10,7 @@ void rootlogon() {
 	gStyle->SetPadBottomMargin(0.16);
 	gStyle->SetPadLeftMargin(0.16);
 
-	gInterpreter->AddIncludePath("-I/home/ql93/git/MNXB01-PROJECT/include");
+	gInterpreter->AddIncludePath("-I../include");
 
 
 	//Load the classes that we want to use automatically - Convenient!
