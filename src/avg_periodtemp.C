@@ -30,9 +30,12 @@ TH1D* temperature_over_period(const char* name, Int_t yeara, Int_t yearb, Weathe
     int monthdays[] = { 31, 28, 31, 30, 31, 30,
                          31, 31, 30, 31, 30, 31 };
 
+	std::stringstream periodstring;
+	periodstring << yeara << "-" << yearb;
+
    // histogram for the period
     for(int month = 1; month <= 12; month++){
-        std::cout << "Processing month " << month << " for \"" << name << "\"" << std::endl;
+        std::cout << "Processing month " << month << " for \"" << name << "\" (" << periodstring.str() << ")" << std::endl;
         for(int day = 1; day <= monthdays[month-1]; day++){
 			std::stringstream regexpr;
             regexpr << yeara << "-" << month << "-" << day;
@@ -62,14 +65,31 @@ void temperature_over_two_periods(Int_t year1a, Int_t year1b, Int_t year2a, Int_
 	std::cout << "Done. Creating canvas and drawing..." << std::endl;
 
     // calculate average difference in temperature
-    double sum = 0;
+    double temperature_diff_sum = 0;
 	for(int bin = 1; bin <= 365; bin++){
-        sum += period2Hist->GetBinContent(bin) - period1Hist->GetBinContent(bin);
+        temperature_diff_sum += period2Hist->GetBinContent(bin) - period1Hist->GetBinContent(bin);
 	}
-    std::cout << "The average difference in temperature between the given time periods is: " << sum/365 << std::endl;
+	double avg_temp_diff = temperature_diff_sum/365;
+    std::cout << "The average difference in temperature between the given time periods is: " << avg_temp_diff << std::endl;
 
     auto c = new TCanvas("periodHist", "Average temperatures for two periods", 1000, 800);
 	period1Hist->Draw();
 	period2Hist->Draw("same");
+
+	// generate legend strings
+	std::stringstream period1string;
+	period1string << year1a << "-" << year1b;
+	std::stringstream period2string;
+	period2string << year2a << "-" << year2b;
+	std::stringstream diffstring;
+	diffstring << "Avg Difference = " << avg_temp_diff;
+
+	// create legend
+	auto leg = new TLegend(0.2, 0.15);
+	leg->SetHeader("Legend", "C");
+	leg->AddEntry(period1Hist, period1string.str().c_str(), "l");
+	leg->AddEntry(period2Hist, period2string.str().c_str(), "l");
+	leg->AddEntry((TObject*)0, diffstring.str().c_str(), "");
+	leg->Draw();
 }
 
