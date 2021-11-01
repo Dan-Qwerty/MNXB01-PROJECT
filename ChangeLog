@@ -4,6 +4,10 @@ as input. Using each pair of ints, it constructs a histogram containing the aver
 then plots the resulting two histograms on top of each other. It also computes the average difference in temperature between the two time periods.
 Also updated README.md with some improvements in formatting and a fixed typo.  --CF
 
+1:11:2021
+Added some more methods to WeatherDataVec and WeatherDataLine, these are mostly for convenience such as a means of extracting data by regex--
+and overloading the index operator [], in a similar vein I added the long overdue constructor method for WeatherDataVec immediately from filename.
+
 28:10:2021
 Encapsulated my functions from "monthly.C" into two classes:
 class Analyse_Monthly    in    "monthly.h" & "monthly.C"
@@ -29,5 +33,5 @@ Just use one of the corresponding functions such as get_day().
 
 IMPORTANT NOTE: it may very well be prudent to split up the header files into both .h and .cpp files, as they are currently quite short I deemed it unecessary;
 and I think that we can keep the file for the WeatherDataLine class and for the miscellaneous functions for the csv parsing as is since I don't imagine they will grow in length.
-However, we should consider whether or not to make a separate .cpp file for WeatherDataVec; this is probably the right thing to do depending on how we want to continue coding.
+However, we should consider whether or not to make a separate .cpp file for WeatherDataVec; this is probably the right thing to do depending on how we want to continue coding. -DF
 
