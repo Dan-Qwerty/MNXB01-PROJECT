@@ -1,0 +1,75 @@
+#include "WeatherDataLine.h"
+#include "WeatherDataVec.h"
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <iostream>
+#include <sstream>
+
+// ROOT library objects
+#include <TF1.h> // 1d function class
+#include <TH1.h> // 1d histogram classes
+#include <TStyle.h>  // style object
+#include <TMath.h>   // math functions
+#include <TCanvas.h> // canvas object
+
+
+int convert_dm_to_day(int day, int month){
+    int monthdays[] = { 31, 28, 31, 30, 31, 30,
+                         31, 31, 30, 31, 30, 31 };
+
+    int days_prior = 0;
+    for(int m = 0; m < month-1; m++)
+        days_prior += monthdays[m];
+    return days_prior + day;
+}
+
+TH1D* temperature_over_period(const char* name, Int_t yeara, Int_t yearb, WeatherDataVec data){
+    auto hist = new TH1D(name, "Average Temperature; Day; Temperature", 365, 1, 366);
+
+    int monthdays[] = { 31, 28, 31, 30, 31, 30,
+                         31, 31, 30, 31, 30, 31 };
+
+   // histogram for the period
+    for(int month = 1; month <= 12; month++){
+        std::cout << "Processing month " << month << " for \"" << name << "\"" << std::endl;
+        for(int day = 1; day <= monthdays[month-1]; day++){
+			std::stringstream regexpr;
+            regexpr << yeara << "-" << month << "-" << day;
+            for(int year = yeara+1; year <= yearb; year++)
+                regexpr << "|" << year << "-" << month << "-" << day;
+            WeatherDataVec daydata = data.get_by_regex(regexpr.str());
+			std::vector<double> daytemps = daydata.list_temperatures();
+            if(daytemps.size() == 0)
+                continue;
+			double day_avg = std::accumulate(daytemps.begin(), daytemps.end(), 0.0)/daytemps.size();
+
+            hist->SetBinContent(convert_dm_to_day(day, month), day_avg);
+        }
+    }
+	return hist;
+}
+
+void temperature_over_two_periods(Int_t year1a, Int_t year1b, Int_t year2a, Int_t year2b,
+                                  WeatherDataVec data) {
+	std::cout << "Constructing histrogram for the first period..." << std::endl;
+    auto period1Hist = temperature_over_period("First period", year1a, year1b, data);
+	period1Hist->SetLineColor(kBlue);
+
+	std::cout << "Done.\nConstructing histrogram for the second period..." << std::endl;
+    auto period2Hist = temperature_over_period("Second period", year2a, year2b, data);
+	period2Hist->SetLineColor(kRed);
+	std::cout << "Done. Creating canvas and drawing..." << std::endl;
+
+    // calculate average difference in temperature
+    double sum = 0;
+	for(int bin = 1; bin <= 365; bin++){
+        sum += period2Hist->GetBinContent(bin) - period1Hist->GetBinContent(bin);
+	}
+    std::cout << "The average difference in temperature between the given time periods is: " << sum/365 << std::endl;
+
+    auto c = new TCanvas("periodHist", "Average temperatures for two periods", 1000, 800);
+	period1Hist->Draw();
+	period2Hist->Draw("same");
+}
+
