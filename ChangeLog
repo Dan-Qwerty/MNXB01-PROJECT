@@ -1,3 +1,9 @@
+01:11:2021
+Added a ROOT script called "avg_periodtemp.C" which contains a function "temperature_over_two_periods" taking 2 pairs of ints and a WeatherDataVec
+as input. Using each pair of ints, it constructs a histogram containing the average temperature for each day of the period defined by the two ints,
+then plots the resulting two histograms on top of each other. It also computes the average difference in temperature between the two time periods.
+Also updated README.md with some improvements in formatting and a fixed typo.  --CF
+
 28:10:2021
 Encapsulated my functions from "monthly.C" into two classes:
 class Analyse_Monthly    in    "monthly.h" & "monthly.C"

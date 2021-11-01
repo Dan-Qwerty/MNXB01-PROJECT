@@ -15,7 +15,7 @@ module load OpenMPI/1.10.3
 module load ROOT/6.10.02-Python-2.7.12
 ```
 
-Team members: Carl-Fredrik Lidgren, Daniel Falkowski, Isak Ellme, Qian Liu 
+Team members: Carl-Fredrik Lidgren, Daniel Falkowski, Isak Ellmer, Qian Liu 
 
 
 
