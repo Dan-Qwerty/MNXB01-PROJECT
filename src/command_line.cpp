@@ -12,8 +12,21 @@ std::string* fetch_command_list(std::string* argv) {
 
 	while (line.find(" ") <= line.length()) {
 		int a = line.find(" ");
-		*argv++ = line.substr(0, a);
-		line = line.substr(a + 1, line.length() - (a + 1));
+		if(line.find("'") == 0) {
+			line=line.substr(1, line.length() - 1);
+			a = line.find("'");
+
+			*argv++ = line.substr(0, a);
+
+			line = line.substr(a + 1, line.length() - (a + 1));
+
+		}else {
+			*argv++ = line.substr(0, a);
+			line = line.substr(a + 1, line.length() - (a + 1));
+		}
+
+		
+		
 	}
 	*argv++ = line;
 
@@ -42,13 +55,7 @@ int execute_command_list(Command_list command_list) {
 		return 0;
 	}
 	else if (t == "clear") {
-		
-#ifdef __unix__
 		system("clear");
-#endif
-#ifdef _WIN32
-		system("cls");
-#endif
 		return 1;
 	}
 	else if (t == "help") {
