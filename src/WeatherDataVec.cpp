@@ -8,6 +8,15 @@ WeatherDataVec::WeatherDataVec(std::vector<std::string> data_strings){
     data = v;
 }
 
+WeatherDataVec::WeatherDataVec(std::string filename){
+    std::vector<std::string> data_strings {datavec(filename)};
+    std::vector<WeatherDataLine> v;
+    for (std::string m : data_strings){
+        v.push_back(WeatherDataLine {m});
+    }
+    data = v;
+}
+
 WeatherDataVec::WeatherDataVec(std::vector<WeatherDataLine> d) : data{d} {}
 
 WeatherDataVec WeatherDataVec::get_by_month(int month){
@@ -64,4 +73,22 @@ std::vector<double> WeatherDataVec::list_temperatures(){
         v.push_back(w.get_temp());
     }
     return v;
+}
+
+WeatherDataLine WeatherDataVec::operator[](int index){
+    return data[index];
+}
+
+WeatherDataVec WeatherDataVec::get_by_regex(std::string inpstr){
+    //Some preprocessing in case someone does a silly input
+    std::regex wildcard {"\\*+"};
+    std::string out = std::regex_replace(inpstr, wildcard, ".+");
+    std::regex mainstr {out};
+    std::vector<WeatherDataLine> v;
+    for(auto w : data){
+        if (std::regex_match(w.to_str(),mainstr)){
+            v.push_back(w);
+        }
+    }
+    return WeatherDataVec {v};
 }

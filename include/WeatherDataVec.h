@@ -21,11 +21,17 @@ class WeatherDataVec{
 
     WeatherDataVec(std::vector<WeatherDataLine> d); // constructor
 
+    WeatherDataVec(std::string filename); //constructor
+
     WeatherDataVec get_by_month(int month);
 
     WeatherDataVec get_by_year(int year);
 
     WeatherDataVec get_by_day(int day);
+
+    WeatherDataVec get_by_regex(std::string inpstr);
+
+    WeatherDataLine operator[](int index);
 
     std::vector<int> list_years();
 
