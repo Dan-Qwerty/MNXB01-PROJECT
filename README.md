@@ -13,7 +13,7 @@ Then load and run ROOT inside the directory src/
 
 All of the files will be linked automatically.
 
-We use the following commands to load ROOT on Auror:
+We use the following commands to load ROOT on Aurora:
 
 module load GCC/5.4.0-2.26
 module load OpenMPI/1.10.3
