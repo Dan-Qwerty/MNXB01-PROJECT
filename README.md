@@ -5,10 +5,6 @@ All codes are based on Aurora.
 
 There are some steps before inspecting the codes and results.
 
-Please open the file src/rootlogon.C, modify the path of include/ in the command:
-gInterpreter->AddIncludePath("-I/home/ql93/git/MNXB01-PROJECT/include");
-to your own absolute path of include/ on your computer.
-
 Then load and run ROOT inside the directory src/ 
 
 All of the files will be linked automatically.
