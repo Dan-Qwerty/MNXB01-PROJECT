@@ -12,6 +12,13 @@ Gregorian::Gregorian(int Y,int M, int D){
     jdn = (1461 * (Y + 4800 + (M - 14)/12))/4 +(367 * (M - 2 - 12 * ((M - 14)/12)))/12 - (3 * ((Y + 4900 + (M - 14)/12)/100))/4 + D - 32075;
 }
 
+Gregorian::Gregorian(WeatherDataLine line){
+	year = line.get_year();
+	month = line.get_month();
+	day = line.get_day();
+	jdn = (1461 * (year + 4800 + (month - 14)/12))/4 +(367 * (month - 2 - 12 * ((month - 14)/12)))/12 - (3 * ((year + 4900 + (month - 14)/12)/100))/4 + day - 32075;
+}
+
 //initialize from Julian Day Number
 Gregorian::Gregorian(int J){
     const int y = 4716;

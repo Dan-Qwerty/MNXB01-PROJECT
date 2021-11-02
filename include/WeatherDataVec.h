@@ -34,6 +34,8 @@ class WeatherDataVec{
 
     WeatherDataVec get_between(std::string ststr, std::string edstr);
 
+	WeatherDataVec avg_by_day();
+
     WeatherDataLine operator[](int index);
 
     WeatherDataLine operator()(int index);

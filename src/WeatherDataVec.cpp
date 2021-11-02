@@ -84,6 +84,30 @@ std::vector<double> WeatherDataVec::list_temperatures(){
     return v;
 }
 
+//averages by day
+WeatherDataVec WeatherDataVec::avg_by_day(){
+	std::string current_date = data[0].to_str();
+	WeatherDataLine line(data[0].get_year(), data[0].get_month(), data[0].get_day(), data[0].get_temp());
+	std::vector<WeatherDataLine> avgdata;
+	std::vector<double> temps;
+	for(auto w : data){
+		if(w.to_str() == current_date){
+			line.date[0] = w.get_year();
+			line.date[1] = w.get_month();
+			line.date[2] = w.get_day();
+			temps.push_back(w.get_temp());
+		} else {
+			double avg_temp = std::accumulate(temps.begin(), temps.end(), 0.0)/temps.size();
+			line.temperature = avg_temp;
+			avgdata.push_back(line);
+			current_date = w.to_str();
+			temps.clear();
+			temps.push_back(w.get_temp());
+		}
+	}
+	return WeatherDataVec{avgdata};
+}
+
 //Provides conventional indexing
 WeatherDataLine WeatherDataVec::operator[](int index){
     return data[index];

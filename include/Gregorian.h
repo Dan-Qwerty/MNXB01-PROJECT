@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "WeatherDataLine.h"
 
 class Gregorian{
     public:
@@ -17,6 +18,9 @@ class Gregorian{
 
     //initialize from Julian Day Number
     Gregorian(int J);
+
+	//initialize from a WeatherDataLine
+	Gregorian(WeatherDataLine line);
 
     int get_year();
 
