@@ -1,5 +1,9 @@
 #include "Gregorian.h"
 
+/*
+To see why this works consult the link: https://en.wikipedia.org/wiki/Julian_day
+*/
+
 //initialize from (year,month,day)
 Gregorian::Gregorian(int Y,int M, int D){
     year = Y;
