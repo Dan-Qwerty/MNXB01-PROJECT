@@ -31,7 +31,13 @@ class WeatherDataVec{
 
     WeatherDataVec get_by_regex(std::string inpstr);
 
+    WeatherDataVec get_between(std::string ststr, std::string edstr);
+
     WeatherDataLine operator[](int index);
+
+    WeatherDataLine operator()(int index);
+
+    WeatherDataVec operator()(int startindex, int endindex);
 
     std::vector<int> list_years();
 
