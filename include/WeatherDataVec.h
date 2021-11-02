@@ -51,6 +51,8 @@ class WeatherDataVec{
     double maxtemp();
 
     double mintemp();
+
+    bool isempty();
 };
 
 #endif /*WEATHERDATAVEC_H*/

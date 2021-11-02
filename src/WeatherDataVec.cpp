@@ -140,3 +140,7 @@ double WeatherDataVec::avgtemp(){
     std::vector<double> v {list_temperatures()};
     return std::accumulate( v.begin(), v.end(), 0.0)/v.size();
 }
+
+bool WeatherDataVec::isempty(){
+    return data.empty();
+}
