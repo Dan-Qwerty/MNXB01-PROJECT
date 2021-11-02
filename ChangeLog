@@ -1,20 +1,19 @@
 02:11:2021
+Added "global_temperature_regression.C", which tries to fit a linearly increasing sin function to given data.
+Modified some of the utility classes to add some functionality. --CF
+
 Added isempty to WeatherDataVec -- DF
 
-02:11:2021
 Added more features to WeatherDataVec in particular avgtemp, mintemp, maxtemp --DF
 
-02:11:2021
 Added a new class called Gregorian, this permits immediate addition of dates just initialize with Gregorian gDate {year,month,day};
 Then you can freely add dates with gDate1 + gDate2. --DF
 
-02:11:2021
 Added some more ways of accessing WeatherDataVec -- There are now two indexing operators [],(): 
 --For WeatherDataVec Wdata we could have Wdata[5] or Wdata(5) both of which will return the 6th entry in data.
 Furthermore Wdata(2,19) gives all entries from 2-19. Also, added Wdata.get_between() which takes two string arguments for the start and end date;
 --and yields all dates in the intermediate range. --DF
 
-02:11:2021
 Improve the classes Analyse_Monthly and Analyse_Corona, adding more parameters. --QL
 
 
@@ -24,9 +23,8 @@ as input. Using each pair of ints, it constructs a histogram containing the aver
 then plots the resulting two histograms on top of each other. It also computes the average difference in temperature between the two time periods.
 Also updated README.md with some improvements in formatting and a fixed typo.  --CF
 
-1:11:2021
 Added some more methods to WeatherDataVec and WeatherDataLine, these are mostly for convenience such as a means of extracting data by regex--
-and overloading the index operator [], in a similar vein I added the long overdue constructor method for WeatherDataVec immediately from filename.
+and overloading the index operator [], in a similar vein I added the long overdue constructor method for WeatherDataVec immediately from filename. --DF
 
 28:10:2021
 Encapsulated my functions from "monthly.C" into two classes:
