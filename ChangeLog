@@ -1,4 +1,8 @@
 02:11:2021
+Added a new class called Gregorian, this permits immediate addition of dates just initialize with Gregorian gDate {year,month,day};
+Then you can freely add dates with gDate1 + gDate2. --DF
+
+02:11:2021
 Added some more ways of accessing WeatherDataVec -- There are now two indexing operators [],(): 
 --For WeatherDataVec Wdata we could have Wdata[5] or Wdata(5) both of which will return the 6th entry in data.
 Furthermore Wdata(2,19) gives all entries from 2-19. Also, added Wdata.get_between() which takes two string arguments for the start and end date;
