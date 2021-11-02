@@ -1,6 +1,6 @@
 #include "monthly.h"
 
-Analyse_Monthly::Analyse_Monthly(Int_t month): _month{month}{
+Analyse_Monthly::Analyse_Monthly(Int_t month, std::string filename): _month{month}, _filename{filename}{
 	Month_tree();
 }
 
@@ -13,8 +13,11 @@ void Analyse_Monthly::Month_tree() {
 	tree->Branch("data", "TClonesArray", &dataArray);
 	Int_t nT = 0;
 	
-	std::string filename {"../datasets/smhi-opendata_1_53430_20210926_101122_Lund.csv"};
-	WeatherDataVec Wdata {datavec(filename)};
+	std::string name1 = "../datasets/";
+	std::string name2 = _filename;
+	std::string filename = name1 + name2;
+	//std::string filename {"../datasets/smhi-opendata_1_53430_20210926_101122_Lund.csv"};
+	WeatherDataVec Wdata {(filename)};
 	WeatherDataVec datamonth = Wdata.get_by_month(_month);
 	std::vector<int> list_years = datamonth.list_years();
 	for(Int_t n = 0; n < (Int_t) list_years.size() ; n++){

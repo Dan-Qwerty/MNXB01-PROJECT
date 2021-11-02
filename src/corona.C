@@ -1,6 +1,6 @@
 #include "corona.h"
 
-Analyse_Corona::Analyse_Corona() {
+Analyse_Corona::Analyse_Corona(std::string city, std::string filename): _city{city}, _filename{filename}{
 	Plot_Corona();
 }
 
@@ -61,35 +61,56 @@ Double_t Analyse_Corona::meanOfPeriod (WeatherDataVec data, int frYear, int frMo
 
 
 void Analyse_Corona::Plot_Corona() {
-	ifstream file("../datasets/lund_corona_data");
+
+	std::string fname1 = "../datasets/Covid Data/Covid_";
+	std::string fname2 = _city;
+	std::string fname3 = ".csv";
+	std::string fname = fname1 + fname2 + fname3;
+
+	std::ifstream file;
+	file.open(fname);
 	Int_t veck1[58];
 	Int_t antal[58];
 	Double_t veck2[58];
 
 	Int_t i1 = 0;
 	Double_t i2 = 0.0;
-	Int_t year, week, kod, a, b, c, d;
-	std::string lund;
-	std::string _temp;
-	while(file >> _temp) {
-		if (_temp == "nya_fall_vecka") {
-			break;
-		}
-	}
+	std::string yearstring, weekstring, numberstring;
+	Int_t year = 0;
+	Int_t week = 0;
+	std::string city;
+	//std::string lessnumber;
+	Int_t number = 0;
+	std::string fileline;
+	std::getline(file, fileline); // the first line will be ignored
 
-	while(file >> year >> week >> kod >> lund >> lund >> a >> b >> c >> d) {	
+	while(std::getline(file, fileline)) {
+		std::istringstream filesteam(fileline);
+		std::getline(filesteam, yearstring,',');
+		std::istringstream ss1(yearstring);
+		ss1 >> year;
+		std::getline(filesteam, weekstring, ',');
+		std::istringstream ss2(weekstring);
+		ss2 >> week;
+		std::getline(filesteam, city, ',');
+		std::getline(filesteam, numberstring, ',');
+		std::istringstream ss3(numberstring);
+		ss3 >> number;
 		if( (year == 2020 && week >= 9) || (year == 2021 && week <=13) ) {
 			veck1[i1] = i1;
 			veck2[i1] = i2;
-			antal[i1] = d;
+			antal[i1] = number;
 			i1++;
 			i2 = i2 + 1.0;
 		}
 	}
 
+	std::string name1 = "../datasets/";
+	std::string name2 = _filename;
+	std::string filename = name1 + name2;
 
-	std::string filename {"../datasets/smhi-opendata_1_53430_20210926_101122_Lund.csv"};
-	WeatherDataVec Wdata {datavec(filename)};
+	//std::string filename {_filename};
+	WeatherDataVec Wdata {(filename)};
 
 	Double_t temp[58];
 	////////this is for test, saving time
