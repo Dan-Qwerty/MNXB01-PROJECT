@@ -125,3 +125,18 @@ WeatherDataVec WeatherDataVec::get_between(std::string ststr, std::string edstr)
     }
     return WeatherDataVec {v};
 }
+
+double WeatherDataVec::mintemp(){
+    std::vector<double> v {list_temperatures()};
+    return *std::min_element(v.begin(),v.end());
+}
+
+double WeatherDataVec::maxtemp(){
+    std::vector<double> v {list_temperatures()};
+    return *std::max_element(v.begin(),v.end());
+}
+
+double WeatherDataVec::avgtemp(){
+    std::vector<double> v {list_temperatures()};
+    return std::accumulate( v.begin(), v.end(), 0.0)/v.size();
+}
