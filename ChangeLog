@@ -1,4 +1,7 @@
 02:11:2021
+Added more features to WeatherDataVec in particular avgtemp, mintemp, maxtemp --DF
+
+02:11:2021
 Added a new class called Gregorian, this permits immediate addition of dates just initialize with Gregorian gDate {year,month,day};
 Then you can freely add dates with gDate1 + gDate2. --DF
 
