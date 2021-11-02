@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <regex>
 #include <string>
 #include <vector>
@@ -49,9 +48,7 @@ class WeatherDataLine{
         return time[2];
     }
     std::string to_str(){
-        std::stringstream sstm;
-        sstm << std::to_string(date[0]) << "-" << std::to_string(date[1]) << "-" << std::to_string(date[2]); 
-        return sstm.str();
+        return std::to_string(date[0]) + "-" + std::to_string(date[1]) + "-" + std::to_string(date[2]); 
     }
 };
 
