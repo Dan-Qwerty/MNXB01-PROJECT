@@ -13,4 +13,4 @@ FILES = main.cpp src/csvregex.cpp src/WeatherDataVec.cpp src/command_line.cpp
 EXECUTABLE_NAME = reg
 
 all:
-	g++ $(FLAGS) $(FILES) -o $(EXECUTABLE_NAME) $(INC_DIR) $(ROOT_LIB)
+	g++ $(FLAGS) $(FILES) -o $(EXECUTABLE_NAME) $(INC_DIR) 
