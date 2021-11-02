@@ -42,10 +42,9 @@ TH1D* temperature_over_period(const char* name, Int_t yeara, Int_t yearb, Weathe
             for(int year = yeara+1; year <= yearb; year++)
                 regexpr << "|" << year << "-" << month << "-" << day;
             WeatherDataVec daydata = data.get_by_regex(regexpr.str());
-			std::vector<double> daytemps = daydata.list_temperatures();
-            if(daytemps.size() == 0)
+			if(daydata.isempty())
                 continue;
-			double day_avg = std::accumulate(daytemps.begin(), daytemps.end(), 0.0)/daytemps.size();
+			double day_avg = daydata.avgtemp();
 
             hist->SetBinContent(convert_dm_to_day(day, month), day_avg);
         }
@@ -55,11 +54,11 @@ TH1D* temperature_over_period(const char* name, Int_t yeara, Int_t yearb, Weathe
 
 void temperature_over_two_periods(Int_t year1a, Int_t year1b, Int_t year2a, Int_t year2b,
                                   WeatherDataVec data) {
-	std::cout << "Constructing histrogram for the first period..." << std::endl;
+	std::cout << "Constructing histogram for the first period..." << std::endl;
     auto period1Hist = temperature_over_period("First period", year1a, year1b, data);
 	period1Hist->SetLineColor(kBlue);
 
-	std::cout << "Done.\nConstructing histrogram for the second period..." << std::endl;
+	std::cout << "Done.\nConstructing histogram for the second period..." << std::endl;
     auto period2Hist = temperature_over_period("Second period", year2a, year2b, data);
 	period2Hist->SetLineColor(kRed);
 	std::cout << "Done. Creating canvas and drawing..." << std::endl;

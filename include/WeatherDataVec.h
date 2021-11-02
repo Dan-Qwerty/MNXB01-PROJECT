@@ -8,6 +8,7 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <numeric>
 #include <set>
 #include "csvregex.h"
 #include "WeatherDataLine.h"
@@ -45,6 +46,13 @@ class WeatherDataVec{
     
     std::vector<double> list_temperatures();
 
+    double avgtemp();
+
+    double maxtemp();
+
+    double mintemp();
+
+    bool isempty();
 };
 
 #endif /*WEATHERDATAVEC_H*/
