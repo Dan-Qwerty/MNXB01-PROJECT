@@ -42,8 +42,29 @@ void global_temperature_regression(int year1, int year2, WeatherDataVec rawdata)
 
     TGraph* gr = new TGraph(data_size, x, y);
     TF1* increasingsin = new TF1("linearsin","[0]+[1]*x+[2]*sin(6.28318*x-[3])", (double)earliest_date.get_year(), (double)last_date.get_year()+1);
-    gr->Fit(increasingsin, "R");
+    TFitResultPtr fitptr = gr->Fit(increasingsin, "QNS");
     gr->Draw();
+
+    // draw fit function with good resolution
+    double dx = 0.05;
+    int arrlen = (int)((last_date.get_year() - earliest_date.get_year() + 1)/dx);
+    double xi[arrlen];
+    double yo[arrlen];
+    double p0 = fitptr->Value(0);
+    increasingsin->SetParameter(0, p0);
+    double p1 = fitptr->Value(1);
+    increasingsin->SetParameter(1, p1);
+    double p2 = fitptr->Value(2);
+    increasingsin->SetParameter(2, p2);
+    double p3 = fitptr->Value(3);
+    increasingsin->SetParameter(3, p3);
+    for(int i = 0; i < arrlen; i++){
+        xi[i] = earliest_date.get_year() + i*dx;
+        yo[i] = increasingsin->Eval(xi[i]);
+    }
+    TGraph* fgr = new TGraph(arrlen, xi, yo);
+    fgr->SetLineColor(kRed);
+    fgr->Draw("same");
 }
 
 
