@@ -12,6 +12,19 @@ Gregorian::Gregorian(int Y,int M, int D){
     jdn = (1461 * (Y + 4800 + (M - 14)/12))/4 +(367 * (M - 2 - 12 * ((M - 14)/12)))/12 - (3 * ((Y + 4900 + (M - 14)/12)/100))/4 + D - 32075;
 }
 
+//initialize from date str "year-month-day"
+Gregorian::Gregorian(std::string datestr){
+    std::vector<int> v {vstr_to_int(string_split(datestr,"-"))};
+    int Y = v[0];
+    int M = v[1];
+    int D = v[2];
+    year = Y;
+    month = M;
+    day = D;
+    jdn = (1461 * (Y + 4800 + (M - 14)/12))/4 +(367 * (M - 2 - 12 * ((M - 14)/12)))/12 - (3 * ((Y + 4900 + (M - 14)/12)/100))/4 + D - 32075;
+}
+
+//initialize from WeatherDataLine
 Gregorian::Gregorian(WeatherDataLine line){
 	year = line.get_year();
 	month = line.get_month();
@@ -65,6 +78,10 @@ int Gregorian::get_julian_day_number(){
     return jdn;
 }
 
+std::string Gregorian::get_datestr(){
+    return datedata_tostr(year,month,day);
+}
+
 //Add dates together
 Gregorian Gregorian::operator+(Gregorian Gdate){
     return Gregorian {jdn + Gdate.get_julian_day_number()};
@@ -73,4 +90,24 @@ Gregorian Gregorian::operator+(Gregorian Gdate){
 //Add days to current date
 Gregorian Gregorian::operator+(int days){
     return Gregorian {jdn + days};
+}
+
+bool Gregorian::operator==(Gregorian GDate){
+    return (jdn == GDate.get_julian_day_number());
+}
+
+bool Gregorian::operator<=(Gregorian GDate){
+    return (jdn <= GDate.get_julian_day_number());
+}
+
+bool Gregorian::operator<(Gregorian GDate){
+    return (jdn < GDate.get_julian_day_number());
+}
+
+bool Gregorian::operator>(Gregorian GDate){
+    return (jdn > GDate.get_julian_day_number());
+}
+
+bool Gregorian::operator>=(Gregorian GDate){
+    return (jdn >= GDate.get_julian_day_number());
 }

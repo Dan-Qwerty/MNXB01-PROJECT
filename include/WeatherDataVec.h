@@ -34,6 +34,16 @@ class WeatherDataVec{
 
     WeatherDataVec get_between(std::string ststr, std::string edstr);
 
+    WeatherDataVec get_between(int year1, int month1, int day1, int year2, int month2, int day2);
+
+    WeatherDataVec get_after(std::string datestr);
+
+    WeatherDataVec get_after(int year, int month, int day);
+
+    WeatherDataVec get_before(std::string datestr);
+
+    WeatherDataVec get_before(int year, int month, int day);
+
 	WeatherDataVec avg_by_day();
 
     WeatherDataLine operator[](int index);

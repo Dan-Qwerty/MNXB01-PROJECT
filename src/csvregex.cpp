@@ -41,3 +41,7 @@ std::vector<std::string> datavec(std::string filename){
     file.close();
     return v;
 }
+
+std::string datedata_tostr(int year, int month, int day){
+    return std::to_string(year) + "-" + std::to_string(month) + "-" + std::to_string(day);
+}

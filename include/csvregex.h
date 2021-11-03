@@ -15,4 +15,6 @@ std::vector<int> vstr_to_int(std::vector<std::string> str_vec);
 //Get semi-raw data from csv
 std::vector<std::string> datavec(std::string filename);
 
+std::string datedata_tostr(int year, int month, int day);
+
 #endif

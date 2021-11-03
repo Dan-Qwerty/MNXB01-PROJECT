@@ -4,6 +4,7 @@ Analyse_Monthly::Analyse_Monthly(Int_t month, std::string filename): _month{mont
 	Month_tree();
 }
 
+
 void Analyse_Monthly::Month_tree() const{
 	// Create the outfile and data structure
 	TFile* file = new TFile("monthdata.root", "RECREATE");
@@ -40,6 +41,7 @@ void Analyse_Monthly::Month_tree() const{
 	file->Write();
 	file->Close();
 }
+
 
 void Analyse_Monthly::Temp_PerMonth() const{
 	//open the root file and get the tree

@@ -4,6 +4,7 @@ Analyse_Corona::Analyse_Corona(std::string city, std::string filename): _city{ci
 	Plot_Corona();//plot the figure of the relation between the temperature and number of people infected with the COVID-19 when a new object is created.
 }
 
+/*
 tuple<int, int, int> Analyse_Corona::dateCalculation(int year, int month, int date, int period) const{
 	date = date + period; // period is day, from 0 to any positive integer
 	int count =1; // initialize the condition counter: count
@@ -45,7 +46,9 @@ tuple<int, int, int> Analyse_Corona::dateCalculation(int year, int month, int da
 
 	return make_tuple(year, month, date);
 }
+*/
 
+/*
 Double_t Analyse_Corona::meanOfPeriod (WeatherDataVec data, int frYear, int frMonth, int frDate, int period) const{
 // return the mean temperature between the date frYear.frMonth.frDate to the date (frYear.frMonth.frDate)+period
 	Double_t sum = 0.0;
@@ -63,14 +66,10 @@ Double_t Analyse_Corona::meanOfPeriod (WeatherDataVec data, int frYear, int frMo
 	std::cout << sum/count << std::endl;
 	return sum/count;
 }
-
+*/
 
 void Analyse_Corona::Plot_Corona() const{
-
-	std::string fname1 = "../datasets/Covid Data/Covid_";
-	std::string fname2 = _city;
-	std::string fname3 = ".csv";
-	std::string fname = fname1 + fname2 + fname3;
+	std::string fname = "../datasets/Covid Data/Covid_" + _city + ".csv";
 
 	std::ifstream file;
 	file.open(fname);
@@ -109,23 +108,33 @@ void Analyse_Corona::Plot_Corona() const{
 		}
 	}
 
-	std::string name1 = "../datasets/";
-	std::string name2 = _filename;
-	std::string filename = name1 + name2;
-
-	WeatherDataVec Wdata {(filename)};
+	WeatherDataVec Wdata {"../datasets/" + _filename};
 
 	Double_t temp[58];
 	// set the begining date and the due date we want to analyse
-	Int_t frYear = 2020;
-	Int_t frMonth = 2;
-	Int_t frDate = 24;
-	Int_t toYear = 2021;
-	Int_t toMonth = 4;
-	Int_t toDate = 4;
-	Int_t _i = 0; // counter
+	int frYear = 2020;
+	int frMonth = 2;
+	int frDay = 24;
+	int toYear = 2021;
+	int toMonth = 4;
+	int toDay = 4;
+	int _i = 0; // counter
 	std::cout << "\nYY.MM.DD -- Degree Celsius" << std::endl;
 
+	//This should be equivalent to all the previous code modulo some compile errors -- might need to fix
+	WeatherDataVec Wbetween {Wdata.get_between(frYear,frMonth,frYear,toYear,toMonth,toDay).avg_by_day()};
+	Gregorian counter_date {frYear,frMonth,frDay};
+	std::vector<double> tempvec;
+	while(counter_date < Gregorian(toYear,toMonth,toDay)){
+		tempvec.push_back(Wdata.get_between(counter_date.get_datestr(),(counter_date+7).get_datestr()).avgtemp());
+		counter_date = counter_date+7;
+	}
+	for(int i = 0 ; i < tempvec.size(); i++){
+		temp[i] = tempvec[i];
+	}
+
+
+/*	
 	// determine weekly mean temperature from the date frYear.frMonth.frDate to the date toYear.toMonth.toDate
 	while (!(frYear >= toYear && frMonth >= toMonth && frDate >= toDate)){
 		//do the following if the current date is not beyond the target date
@@ -134,6 +143,8 @@ void Analyse_Corona::Plot_Corona() const{
 		tie(frYear, frMonth, frDate) = dateCalculation(frYear, frMonth, frDate, 7); // determine the next date and assign to current
 		_i++;
 	}
+*/
+
 
 	TCanvas *c3 = new TCanvas("c3","Temperature & Corona",200,10,1200,600);
 	TGraph* g1 = new TGraph(58, veck1, antal); // figure of the number of infected people

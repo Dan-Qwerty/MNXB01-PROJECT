@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "WeatherDataLine.h"
+#include "csvregex.h"
 
 class Gregorian{
     public:
@@ -19,6 +20,9 @@ class Gregorian{
     //initialize from Julian Day Number
     Gregorian(int J);
 
+    //initialize from date string
+    Gregorian(std::string datestr);
+
 	//initialize from a WeatherDataLine
 	Gregorian(WeatherDataLine line);
 
@@ -30,11 +34,23 @@ class Gregorian{
 
     int get_julian_day_number();
 
+    std::string get_datestr();
+
     //Add dates together
     Gregorian operator+(Gregorian Gdate);
 
     //Add days to current date
     Gregorian operator+(int days);
+
+    bool operator==(Gregorian GDate);
+
+    bool operator<=(Gregorian GDate);
+
+    bool operator<(Gregorian GDate);
+
+    bool operator>(Gregorian GDate);
+
+    bool operator>=(Gregorian GDate);
 };
 
 #endif /*GREGORIAN_H*/

@@ -143,12 +143,45 @@ WeatherDataVec WeatherDataVec::get_by_regex(std::string inpstr){
 WeatherDataVec WeatherDataVec::get_between(std::string ststr, std::string edstr){
     std::vector<WeatherDataLine> v;
     for (auto w : data){
-        if ((ststr < w.to_str()) && (w.to_str() < edstr)){
+        if ((ststr <= w.to_str()) && (w.to_str() <= edstr)){
             v.push_back(w);
         }
     }
     return WeatherDataVec {v};
 }
+
+WeatherDataVec WeatherDataVec::get_between(int year1, int month1, int day1, int year2, int month2, int day2){
+    return get_between(datedata_tostr(year1,month1,day1),datedata_tostr(year2,month2,day2));
+}
+
+WeatherDataVec WeatherDataVec::get_after(std::string datestr){
+    std::vector<WeatherDataLine> v;
+    for (auto w : data){
+        if (datestr <= w.to_str()){
+            v.push_back(w);
+        }
+    }
+    return WeatherDataVec {v};
+}
+
+WeatherDataVec WeatherDataVec::get_after(int year, int month, int day){
+    return get_after(datedata_tostr(year,month,day));
+}
+
+WeatherDataVec WeatherDataVec::get_before(std::string datestr){
+    std::vector<WeatherDataLine> v;
+    for (auto w : data){
+        if (w.to_str() <= datestr){
+            v.push_back(w);
+        }
+    }
+    return WeatherDataVec {v};
+}
+
+WeatherDataVec WeatherDataVec::get_before(int year, int month, int day){
+    return get_before(datedata_tostr(year,month,day));
+}
+
 
 double WeatherDataVec::mintemp(){
     std::vector<double> v {list_temperatures()};

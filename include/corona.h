@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <tuple>
 #include "WeatherDataVec.h"
+#include "Gregorian.h"
 
 #include <TF1.h>
 #include <TH1.h>
@@ -22,8 +23,8 @@ class Analyse_Corona {
 	private:
 		std::string _filename; //eg: "smhi-opendata_1_53430_20210926_101122_Lund.csv"
 		std::string _city; //eg: "Lund"
-		tuple<int, int, int> dateCalculation(int year, int month, int date, int period) const; //determine the date of day+period from year.month.day 
-		Double_t meanOfPeriod (WeatherDataVec data, int frYear, int frMonth, int frDate, int period) const; // determine the mean temp from fY,fM,fD with step length period
+		//tuple<int, int, int> dateCalculation(int year, int month, int date, int period) const; //determine the date of day+period from year.month.day 
+		//Double_t meanOfPeriod (WeatherDataVec data, int frYear, int frMonth, int frDate, int period) const; // determine the mean temp from fY,fM,fD with step length period
 		void Plot_Corona() const; //plot the figure of the relation between the temperature and number of people infected with the COVID-19
 	public:
 		Analyse_Corona(std::string city, std::string filename);
