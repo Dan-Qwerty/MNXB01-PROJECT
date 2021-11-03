@@ -1,3 +1,35 @@
+03:11:2021
+Added features to Gregorian and WeatherDataVec classes, and compactified the code in corona.C -- DF
+Fixed some bugs -- CF
+
+02:11:2021
+Added "global_temperature_regression.C", which tries to fit a linearly increasing sin function to given data.
+Modified some of the utility classes to add some functionality. --CF
+
+Added isempty to WeatherDataVec -- DF
+
+Added more features to WeatherDataVec in particular avgtemp, mintemp, maxtemp --DF
+
+Added a new class called Gregorian, this permits immediate addition of dates just initialize with Gregorian gDate {year,month,day};
+Then you can freely add dates with gDate1 + gDate2. --DF
+
+Added some more ways of accessing WeatherDataVec -- There are now two indexing operators [],(): 
+--For WeatherDataVec Wdata we could have Wdata[5] or Wdata(5) both of which will return the 6th entry in data.
+Furthermore Wdata(2,19) gives all entries from 2-19. Also, added Wdata.get_between() which takes two string arguments for the start and end date;
+--and yields all dates in the intermediate range. --DF
+
+Improve the classes Analyse_Monthly and Analyse_Corona, adding more parameters. --QL
+
+
+01:11:2021
+Added a ROOT script called "avg_periodtemp.C" which contains a function "temperature_over_two_periods" taking 2 pairs of ints and a WeatherDataVec
+as input. Using each pair of ints, it constructs a histogram containing the average temperature for each day of the period defined by the two ints,
+then plots the resulting two histograms on top of each other. It also computes the average difference in temperature between the two time periods.
+Also updated README.md with some improvements in formatting and a fixed typo.  --CF
+
+Added some more methods to WeatherDataVec and WeatherDataLine, these are mostly for convenience such as a means of extracting data by regex--
+and overloading the index operator [], in a similar vein I added the long overdue constructor method for WeatherDataVec immediately from filename. --DF
+
 28:10:2021
 Encapsulated my functions from "monthly.C" into two classes:
 class Analyse_Monthly    in    "monthly.h" & "monthly.C"
@@ -23,5 +55,5 @@ Just use one of the corresponding functions such as get_day().
 
 IMPORTANT NOTE: it may very well be prudent to split up the header files into both .h and .cpp files, as they are currently quite short I deemed it unecessary;
 and I think that we can keep the file for the WeatherDataLine class and for the miscellaneous functions for the csv parsing as is since I don't imagine they will grow in length.
-However, we should consider whether or not to make a separate .cpp file for WeatherDataVec; this is probably the right thing to do depending on how we want to continue coding.
+However, we should consider whether or not to make a separate .cpp file for WeatherDataVec; this is probably the right thing to do depending on how we want to continue coding. -DF
 

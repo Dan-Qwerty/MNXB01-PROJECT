@@ -26,6 +26,12 @@ class WeatherDataLine{
         temperature = std::stof(first_split[2]);
     }
 
+	WeatherDataLine(int year, int month, int day, double temp){
+		date = std::vector<int>{year, month, day};
+		time = std::vector<int>{-1,-1,-1};
+		temperature = temp;
+	}
+
     double get_temp(){
         return temperature;
     }
@@ -46,6 +52,9 @@ class WeatherDataLine{
     }
     int get_second(){
         return time[2];
+    }
+    std::string to_str(){
+        return std::to_string(date[0]) + "-" + std::to_string(date[1]) + "-" + std::to_string(date[2]); 
     }
 };
 

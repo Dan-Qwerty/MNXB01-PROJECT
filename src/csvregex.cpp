@@ -15,6 +15,7 @@ std::vector<std::string> string_split(std::string s, std::string delim){
     return terms;
 }
 
+
 //converts vector of strings to vector of ints
 std::vector<int> vstr_to_int(std::vector<std::string> str_vec){
     std::string str;
@@ -40,4 +41,8 @@ std::vector<std::string> datavec(std::string filename){
     }
     file.close();
     return v;
+}
+
+std::string datedata_tostr(int year, int month, int day){
+    return std::to_string(year) + "-" + std::to_string(month) + "-" + std::to_string(day);
 }

@@ -10,12 +10,13 @@ void rootlogon() {
 	gStyle->SetPadBottomMargin(0.16);
 	gStyle->SetPadLeftMargin(0.16);
 
-	gInterpreter->AddIncludePath("-I/home/ql93/git/MNXB01-PROJECT/include");
+	gInterpreter->AddIncludePath("-I../include");
 
 
 	//Load the classes that we want to use automatically - Convenient!
 	gROOT->ProcessLine(".L csvregex.cpp+");
 	gROOT->ProcessLine(".L WeatherDataVec.cpp+");
+	gROOT->ProcessLine(".L Gregorian.cpp+");
 	gROOT->ProcessLine(".L ../include/RootClass.C+");
  	gROOT->ProcessLine(".L monthly.C"); 
 	gROOT->ProcessLine(".L corona.C"); 

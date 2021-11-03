@@ -26,12 +26,17 @@
 class Analyse_Monthly {
 	private:
 	Int_t _month;
-	void Month_tree(); //TTree building
+	std::string _filename;
+	void Month_tree() const; //TTree building
 	public:
-	Analyse_Monthly(Int_t month);
-	void Temp_PerMonth(); //plot the histo of the average temperature of the month
-	void Month_Extreme(); //plot the extreme temperatures & average temperature of the month each year
+	Analyse_Monthly(Int_t month, std::string filename);
+	void Temp_PerMonth() const; //plot the histo of the average temperature of the month
+	void Month_Extreme() const; //plot the extreme temperatures & average temperature of the month each year
 };
 
 
 #endif /*MONTHLY_H*/
+
+//eg:
+//Analyse_Monthly M1 = Analyse_Monthly(2, "smhi-opendata_1_53430_20210926_101122_Lund.csv");
+//Analyse_Monthly M1 = Analyse_Monthly(3, "smhi-opendata_1_105370_20210926_100841_Falun.csv");

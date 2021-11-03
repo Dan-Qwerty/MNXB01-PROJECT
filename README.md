@@ -1,33 +1,24 @@
 # MNXB01-PROJECT
-The project of the course MNXB01
+This is the project in the course MNXB01 2021 HT
 
-///////////////////////////////////////////////////////
+All codes are based on Aurora. 
 
-I highly suggest if anyone is still struggling for Root,
-the following commands to load Root on Aurora may help
+Load and run ROOT inside the directory src/ 
 
-module load GCC/5.4.0-2.26
+All of the files will be linked automatically.
 
-module load OpenMPI/1.10.3
+We use the following commands to load ROOT on Aurora:
 
+```
+module load GCC/5.4.0-2.26  
+module load OpenMPI/1.10.3  
 module load ROOT/6.10.02-Python-2.7.12
+```
 
-and then if you 
-
-root  or  root -l 
-
-under the directory with rootlogon.C ( on github it is with the MY absolute path of include/, you should change it to you OWN path),
-then all will run automatically, no need for Makefile anymore.
-
-/////////////////////////////////////////////////////////
+Team members: Carl-Fredrik Lidgren, Daniel Falkowski, Isak Ellmer, Qian Liu 
 
 
-Use the makefile to compile the project.
-Run the command "module load GCCcore/8.3.0" if you're compiling on aurora.
-The standard compiler is too old.
 
-The project will not compile on windows, only on aurora.
-To compile on windows remove $(ROOT_LIB) in the makefile.
 
 https://www.overleaf.com/4442485513qrkytxnthsqr
 the link for an online latex editor to the project report
