@@ -8,7 +8,7 @@ WARNINGS = -Wall -Werror -Wextra
 
 FLAGS = $(STANDARD) $(WARNINGS)
 
-FILES = main.cpp src/csvregex.cpp src/WeatherDataVec.cpp src/command_line.cpp
+FILES = main.cpp src/csvregex.cpp src/Gregorian.cpp src/WeatherDataVec.cpp src/command_line.cpp
 
 EXECUTABLE_NAME = reg
 

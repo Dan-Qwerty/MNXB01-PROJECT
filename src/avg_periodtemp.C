@@ -75,6 +75,7 @@ void temperature_over_two_periods(Int_t year1a, Int_t year1b, Int_t year2a, Int_
     std::cout << "The average difference in temperature between the given time periods is: " << avg_temp_diff << std::endl;
 
     auto c = new TCanvas("periodHist", "Average temperatures for two periods", 1000, 800);
+    c = c;
 	period1Hist->Draw();
 	period2Hist->Draw("same");
 
