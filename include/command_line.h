@@ -18,6 +18,8 @@ struct Command_list {
 	std::string* begin() { return command_list; }
 	std::string* end() { return last; }
 
+	int size() { return last-command_list; }
+
 private:
 	std::string command_list[16], * last;
 };

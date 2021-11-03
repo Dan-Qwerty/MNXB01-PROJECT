@@ -12,6 +12,7 @@
 #include <TStyle.h>  // style object
 #include <TMath.h>   // math functions
 #include <TCanvas.h> // canvas object
+#include <TLegend.h>
 
 
 int convert_dm_to_day(int day, int month){
