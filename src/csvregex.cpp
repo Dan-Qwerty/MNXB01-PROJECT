@@ -15,6 +15,7 @@ std::vector<std::string> string_split(std::string s, std::string delim){
     return terms;
 }
 
+
 //converts vector of strings to vector of ints
 std::vector<int> vstr_to_int(std::vector<std::string> str_vec){
     std::string str;
