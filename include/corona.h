@@ -7,6 +7,8 @@
 #include <string>
 #include <algorithm>
 #include <tuple>
+#include <regex>
+#include "csvregex.h"
 #include "WeatherDataVec.h"
 #include "Gregorian.h"
 

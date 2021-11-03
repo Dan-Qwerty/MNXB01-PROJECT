@@ -78,7 +78,6 @@ void Analyse_Corona::Plot_Corona() const{
 	Double_t veck2[58];
 
 	Int_t i1 = 0;
-	Double_t i2 = 0.0;
 	std::string yearstring, weekstring, numberstring;
 	Int_t year = 0;
 	Int_t week = 0;
@@ -87,6 +86,21 @@ void Analyse_Corona::Plot_Corona() const{
 	std::string fileline;
 	std::getline(file, fileline); // the first line will be ignored
 
+    std::regex re("(<|>)");
+    while(std::getline(file, fileline)) {
+        std::vector<std::string> rawsplit(string_split(std::regex_replace(fileline, re, ""), ","));
+        int year = std::stoi(rawsplit[0]);
+        int week = std::stoi(rawsplit[1]);
+        int number = std::stoi(rawsplit[3]);
+        if( (year == 2020 && week >= 9) || (year == 2021 && week <= 13) ){
+            veck1[i1] = i1;
+            veck2[i1] = i1;
+            antal[i1] = number;
+            i1++;
+        }
+    }
+
+/*
 	while(std::getline(file, fileline)) {
 		std::istringstream filesteam(fileline);
 		std::getline(filesteam, yearstring,',');
@@ -107,6 +121,7 @@ void Analyse_Corona::Plot_Corona() const{
 			i2 = i2 + 1.0;
 		}
 	}
+*/
 
 	WeatherDataVec Wdata {"../datasets/" + _filename};
     std::cout << "Loaded data (with " << Wdata.data.size() << " entries)." << std::endl;
