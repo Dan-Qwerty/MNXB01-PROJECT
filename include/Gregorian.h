@@ -42,6 +42,18 @@ class Gregorian{
     //Add days to current date
     Gregorian operator+(int days);
 
+    //Add dates together
+    Gregorian operator+=(Gregorian Gdate);
+
+    //Add days to current date
+    Gregorian operator+=(int days);
+
+    //Subtract days 
+    Gregorian operator-(int days);
+
+    //Subctract days
+    Gregorian operator-=(int days);
+
     bool operator==(Gregorian GDate);
 
     bool operator<=(Gregorian GDate);
