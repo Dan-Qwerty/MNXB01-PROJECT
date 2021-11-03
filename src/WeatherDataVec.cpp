@@ -156,7 +156,7 @@ WeatherDataVec WeatherDataVec::get_between(int year1, int month1, int day1, int 
     return get_between(datedata_tostr(year1,month1,day1),datedata_tostr(year2,month2,day2));
 }
 
-WeatherDataVec get_between(Gregorian stdate, Gregorian eddate){
+WeatherDataVec WeatherDataVec::get_between(Gregorian stdate, Gregorian eddate){
     return get_between(stdate.get_year(), stdate.get_month(), stdate.get_day(), eddate.get_year(), eddate.get_month(), eddate.get_day());
 }
 
@@ -175,7 +175,7 @@ WeatherDataVec WeatherDataVec::get_after(int year, int month, int day){
     return get_after(datedata_tostr(year,month,day));
 }
 
-WeatherDataVec get_after(Gregorian inpdate){
+WeatherDataVec WeatherDataVec::get_after(Gregorian inpdate){
     return get_after(inpdate.get_year(), inpdate.get_month(), inpdate.get_day());
 }
 
@@ -194,7 +194,7 @@ WeatherDataVec WeatherDataVec::get_before(int year, int month, int day){
     return get_before(datedata_tostr(year,month,day));
 }
 
-WeatherDataVec get_before(Gregorian inpdate){
+WeatherDataVec WeatherDataVec::get_before(Gregorian inpdate){
     return get_before(inpdate.get_year(), inpdate.get_month(), inpdate.get_day());
 }
 
