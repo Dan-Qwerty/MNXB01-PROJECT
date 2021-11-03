@@ -12,6 +12,7 @@
 #include <set>
 #include "csvregex.h"
 #include "WeatherDataLine.h"
+#include "Gregorian.h"
 
 
 class WeatherDataVec{

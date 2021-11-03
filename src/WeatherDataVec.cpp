@@ -142,8 +142,10 @@ WeatherDataVec WeatherDataVec::get_by_regex(std::string inpstr){
 //This gets all dates between ststr and edstr
 WeatherDataVec WeatherDataVec::get_between(std::string ststr, std::string edstr){
     std::vector<WeatherDataLine> v;
+    Gregorian gststr{ststr};
+    Gregorian gedstr{edstr};
     for (auto w : data){
-        if ((ststr <= w.to_str()) && (w.to_str() <= edstr)){
+        if ((gststr <= Gregorian(w.to_str())) && (Gregorian(w.to_str()) <= gedstr)){
             v.push_back(w);
         }
     }
@@ -156,8 +158,9 @@ WeatherDataVec WeatherDataVec::get_between(int year1, int month1, int day1, int 
 
 WeatherDataVec WeatherDataVec::get_after(std::string datestr){
     std::vector<WeatherDataLine> v;
+    Gregorian gdatestr{datestr};
     for (auto w : data){
-        if (datestr <= w.to_str()){
+        if (gdatestr <= Gregorian(w.to_str())){
             v.push_back(w);
         }
     }
@@ -170,8 +173,9 @@ WeatherDataVec WeatherDataVec::get_after(int year, int month, int day){
 
 WeatherDataVec WeatherDataVec::get_before(std::string datestr){
     std::vector<WeatherDataLine> v;
+    Gregorian gdatestr{datestr};
     for (auto w : data){
-        if (w.to_str() <= datestr){
+        if (Gregorian(w.to_str()) <= gdatestr){
             v.push_back(w);
         }
     }

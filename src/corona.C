@@ -109,6 +109,7 @@ void Analyse_Corona::Plot_Corona() const{
 	}
 
 	WeatherDataVec Wdata {"../datasets/" + _filename};
+    std::cout << "Loaded data (with " << Wdata.data.size() << " entries)." << std::endl;
 
 	Double_t temp[58];
 	// set the begining date and the due date we want to analyse
@@ -121,14 +122,20 @@ void Analyse_Corona::Plot_Corona() const{
 	int _i = 0; // counter
 	std::cout << "\nYY.MM.DD -- Degree Celsius" << std::endl;
 
-	//This should be equivalent to all the previous code modulo some compile errors -- might need to fix
-	WeatherDataVec Wbetween {Wdata.get_between(frYear,frMonth,frYear,toYear,toMonth,toDay).avg_by_day()};
+	// equivalent to old code: this has been checked. ("my kind request" - DF) - CF
+    // load data between the begining date and end date
+	WeatherDataVec Wbetween = Wdata.get_between(frYear,frMonth,frDay,toYear,toMonth,toDay);
+    // average the temperature on each day
+    Wbetween = Wbetween.avg_by_day();
 	Gregorian counter_date {frYear,frMonth,frDay};
 	std::vector<double> tempvec;
+    // compute averages over the weeks
 	while(counter_date < Gregorian(toYear,toMonth,toDay)){
-		tempvec.push_back(Wdata.get_between(counter_date.get_datestr(),(counter_date+7).get_datestr()).avgtemp());
-		counter_date = counter_date+7;
+        double avg_temp = Wbetween.get_between(counter_date.get_datestr(),(counter_date+6).get_datestr()).avgtemp();
+		tempvec.push_back(avg_temp);
+		counter_date = counter_date + 7;
 	}
+    // insert computed data into temp
 	for(int i = 0 ; i < tempvec.size(); i++){
 		temp[i] = tempvec[i];
 	}
