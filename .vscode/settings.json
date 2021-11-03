@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "monthly.C": "cpp",
-        "corona.C": "cpp",
-        "global_temperature_regression.C": "cpp",
-        "avg_periodtemp.C": "cpp"
-    }
-}
