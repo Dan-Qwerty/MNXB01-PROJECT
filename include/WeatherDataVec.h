@@ -51,7 +51,7 @@ class WeatherDataVec{
 
     WeatherDataVec get_before(Gregorian inpdate);
 
-	WeatherDataVec avg_by_day();
+    WeatherDataVec avg_by_day();
 
     WeatherDataLine operator[](int index);
 
