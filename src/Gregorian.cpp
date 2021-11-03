@@ -92,6 +92,22 @@ Gregorian Gregorian::operator+(int days){
     return Gregorian {jdn + days};
 }
 
+Gregorian Gregorian::operator+=(Gregorian Gdate){
+    return *this + Gdate;
+}
+
+Gregorian Gregorian::operator+=(int days){
+    return *this + days;
+}
+
+Gregorian Gregorian::operator-(int days){
+    return *this + (-days);
+}
+
+Gregorian Gregorian::operator-=(int days){
+    return *this - days;
+}
+
 bool Gregorian::operator==(Gregorian GDate){
     return (jdn == GDate.get_julian_day_number());
 }
@@ -111,3 +127,4 @@ bool Gregorian::operator>(Gregorian GDate){
 bool Gregorian::operator>=(Gregorian GDate){
     return (jdn >= GDate.get_julian_day_number());
 }
+
