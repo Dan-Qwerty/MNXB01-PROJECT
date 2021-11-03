@@ -1,3 +1,7 @@
+03:11:2021
+Added features to Gregorian and WeatherDataVec classes, and compactified the code in corona.C -- DF
+Fixed some bugs -- CF
+
 02:11:2021
 Added "global_temperature_regression.C", which tries to fit a linearly increasing sin function to given data.
 Modified some of the utility classes to add some functionality. --CF
