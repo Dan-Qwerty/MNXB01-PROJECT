@@ -25,27 +25,29 @@ int convert_dm_to_day(int day, int month){
     return days_prior + day;
 }
 
-TH1D* temperature_over_period(const char* name, Int_t yeara, Int_t yearb, WeatherDataVec data){
+TH1D* temperature_over_period(const char* name, Int_t yeara, Int_t yearb, WeatherDataVec rdata){
     auto hist = new TH1D(name, "Average Temperature; Day; Temperature", 365, 1, 366);
+
+    WeatherDataVec data = rdata.get_between(Gregorian(yeara, 1, 1), Gregorian(yearb, 12, 31));
 
     int monthdays[] = { 31, 28, 31, 30, 31, 30,
                          31, 31, 30, 31, 30, 31 };
 
-	std::stringstream periodstring;
-	periodstring << yeara << "-" << yearb;
+    std::string periodstring = std::to_string(yeara) + "-" + std::to_string(yearb);
 
-   // histogram for the period
+    // histogram for the period
     for(int month = 1; month <= 12; month++){
-        std::cout << "Processing month " << month << " for \"" << name << "\" (" << periodstring.str() << ")" << std::endl;
+        WeatherDataVec monthdata = data.get_by_month(month);
+        std::cout << "Processing month " << month << " for \"" << name << "\" (" << periodstring << ")" << std::endl;
         for(int day = 1; day <= monthdays[month-1]; day++){
-			std::stringstream regexpr;
+            std::stringstream regexpr;
             regexpr << yeara << "-" << month << "-" << day;
             for(int year = yeara+1; year <= yearb; year++)
                 regexpr << "|" << year << "-" << month << "-" << day;
             WeatherDataVec daydata = data.get_by_regex(regexpr.str());
-			if(daydata.isempty())
+            if(daydata.isempty())
                 continue;
-			double day_avg = daydata.avgtemp();
+            double day_avg = daydata.avgtemp();
 
             hist->SetBinContent(convert_dm_to_day(day, month), day_avg);
         }
